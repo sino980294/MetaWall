@@ -1,0 +1,29 @@
+nav{
+  background-color: #FFFFFF;
+}
+.navbar-brand img{
+  height: 36px;
+}
+.nav-item{
+  display: flex;
+  align-items: center;
+}
+.dropdown-menu{
+  right: 0;
+  left :auto;
+}
+.userImage{
+  height: 30px;
+  width: 30px;
+  border: 2px solid #000400;
+  border-radius: 50%;
+}
+.userInfo{
+  min-width:200px ;
+text-align: end;
+
+  .userName{
+    border-bottom: 1px black solid;
+    min-width: 60px;
+  }
+}

@@ -1,0 +1,36 @@
+<div class="login-container d-flex">
+  <div class="container">
+    <div class="row ">
+      <div class="col-8 mx-auto">
+        <div class="login-card">
+          <div class="container">
+            <div class="row">
+              <div class="col-6 d-flex">
+                <img src="../../assets/img/login/login-left.svg" alt="">
+              </div>
+              <div class="col-6">
+                <div class="d-flex flex-column">
+                  <div class="d-flex w-100">
+                    <img src="../../assets/img/login/MetaWall.svg" alt="">
+                  </div>
+
+                  <p>註冊</p>
+                  <form (ngSubmit)="createAccount()" [formGroup]="loginForm">
+                    <input type="text" placeholder="暱稱" formControlName="userName" class="my-2">
+                    <input type="text" placeholder="Email" formControlName="email" class="my-2">
+                    <input type="password" placeholder="Password" formControlName="password" class="my-2">
+                    {{errorMessage}}
+                    <button class="login-btn mb-2 ">註冊</button>
+                    <a routerLink="/login">登入
+
+                    </a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

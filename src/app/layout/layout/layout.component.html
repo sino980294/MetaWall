@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <div class="d-flex flex-nowrap w-100">
+      <a class="navbar-brand" routerLink ="/index" ><img src="../../../assets/img/login/MetaWall.svg" class="" alt=""></a>
+        <ul class="navbar-nav ms-auto me-4">
+          <li class="nav-item dropdown" ngbDropdown >
+            <a class="nav-link dropdown-toggle userInfo" id="navs"ngbDropdownToggle type="button" >
+              <img [src]="userImage" class="userImage" alt=""(error)="updateUserUrl()">
+              <span class="userName mx-3">{{userName}}</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navs" ngbDropdownMenu>
+              <button class="dropdown-item"ngbDropdownItem href="#">我的貼文牆</button>
+              <button class="dropdown-item"ngbDropdownItem href="#">修改個人資料</button>
+              <button class="dropdown-item" ngbDropdownItem (click)="logOut()">登出</button>
+            </div>
+          </li>
+        </ul>
+    </div>
+  </div>
+
+
+</nav>
+<router-outlet></router-outlet>
