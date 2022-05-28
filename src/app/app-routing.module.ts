@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './auth-guard.service';
 
 const routes: Routes = [
+
 {
   canActivate:[AuthGuardService],
   path:'',
@@ -23,11 +24,9 @@ const routes: Routes = [
     }
   ]
 },
-
-  { path: 'login', component: LoginComponent },
-  { path: 'creatAccount', component: CreatAccountComponent },
-
-  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+{ path: 'login', component: LoginComponent },
+{ path: 'creatAccount', component: CreatAccountComponent },
+  { path: '**',   redirectTo: '/login' },
 ];
 
 @NgModule({

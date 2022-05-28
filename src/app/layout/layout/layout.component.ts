@@ -31,7 +31,7 @@ public userImage:string = ""
 
   }
   updateUserUrl(){
-    this.userImage = '../../../assets/img/login/MetaWall.svg'
+    this.userImage = './assets/img/login/MetaWall.svg'
   }
   logOut(){
     this.JwtTokenServiceService.deleteAccessToken();

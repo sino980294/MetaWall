@@ -37,7 +37,7 @@ getPosts(){
   })
 }
 updateUserUrl(index:number){
-  this.postMeaage.data[index].userData.userPhoto = '../../../assets/img/login/MetaWall.svg';
+  this.postMeaage.data[index].userData.userPhoto = './assets/img/login/MetaWall.svg';
 }
 }
 
