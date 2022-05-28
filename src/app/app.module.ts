@@ -13,7 +13,7 @@ import { Users_Service } from '../app/app-info/typescript-angular-client-generat
 import { LoginComponent } from './login/login.component';
 import { Posts_Service } from './app-info/typescript-angular-client-generated/typescript-angular-client/api/posts_.service';
 import { InterceptorService } from './interceptor.service';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
   ],
 
-  providers: [Users_Service,Posts_Service,{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },NgbActiveModal,{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [Users_Service,Posts_Service,{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },NgbActiveModal,{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
