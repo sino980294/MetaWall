@@ -1,8 +1,11 @@
 <div class="container mt-5">
-  <form (ngSubmit)="getPosts()" [formGroup]="searchForm">
+
 <div class="row">
   <div class="col-9">
+    <form (ngSubmit)="getPosts()" [formGroup]="searchForm">
+
 <div class="row">
+
   <div class="col-4">
     <select name="" formControlName="timeSort"(change)="getPosts()">
       <option value="desc">最新貼文</option>
@@ -10,18 +13,20 @@
     </select>
   </div>
   <div class="col-8">
-    <input type="text" formControlName="q" placeholder="搜尋貼文">
+    <input type="text" formControlName="q" (keyup)="getSearchPosts()" placeholder="搜尋貼文">
   </div>
+
 </div>
-<div class="col-12" *ngFor="let post of postMeaage.data;let index = index">
+</form>
+<div class="col-12" *ngFor="let post of postMeaage.data?.posts;let index = index">
 <div class="container postSection">
   <div class="row my-3">
     <div class="col-auto me-3">
-      <img [src]="post.userData.userPhoto" alt="" class="postUserImg"(error)="updateUserUrl(index)">
+      <img [src]="post.userData.userPhoto" alt="" class="postUserImg"(error)="updateUserUrl(post.userData)">
     </div>
     <div class="col-auto">
       {{post.userData.userName}}<br/>
-      {{post.createAt}}
+      {{post.createAt|date:"YYYY-MM-dd hh:mm:ss"}}
       </div>
   </div>
   <p>
@@ -31,10 +36,51 @@
     <img [src]="post.discussPhoto" alt="" *ngIf="post.discussPhoto != ''">
   </div>
 
-  <div>讚數:
-{{post.likes}}
+  <div class="my-2">
+    <button class="like-btn" (click)="likeThis(post)">
+      <fa-icon [icon]="faThumbsUp"[size]="'lg'"   [class]="{'text-blue':post.isLike,'text-gray':!post.isLike}"></fa-icon>
+
+    </button>
+
+    <ng-container *ngIf="post.likes == 0">
+      <span class="text-gray">成為第一個按讚的朋友</span>
+    </ng-container>
+    <ng-container *ngIf="post.likes != 0">
+      {{post.likes}}
+    </ng-container>
   </div>
+  <form  (ngSubmit)="sendComment(post)">
+  <div class="d-flex sendMessageDiv my-2">
+    <div class="userImgDiv mx-2">
+      <img [src]="userInfo?.userPhoto" alt="" class="UserImg" (error)="updateMyUserUrl()">
+    </div>
+        <input type="text" class="" [(ngModel)]="post.userCommentInput" name="comment">
+        <button class="sendMessage">留言</button>
+    </div>
+  </form>
+  <ng-container *ngFor="let comment of post.comments">
+    <div class="comment-section my-2">
+      <div class="container">
+        <div class="d-flex">
+          <div class="userImgDiv mx-2 d-flex align-items-center">
+            <img [src]="userInfo?.userPhoto" alt="" class="UserImg" (error)="updateMyUserUrl()">
+          </div>
+          <div class="">
+            {{comment.commentUser.userName}}<br/>
+            {{comment.createAt|date:"YYYY-MM-dd hh:mm:ss"}}
+
+            </div>
+        </div>
+        <p class="comment-body">
+          {{comment.comment}}
+        </p>
+      </div>
+    </div>
+  </ng-container>
 </div>
+
+
+
 </div>
   </div>
   <div class="col-3">
@@ -43,5 +89,5 @@
 </div>
 
 
-</form>
+
 </div>

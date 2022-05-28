@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { Posts_Service } from './app-info/typescript-angular-client-generated/typescript-angular-client/api/posts_.service';
 import { InterceptorService } from './interceptor.service';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@a
     ReactiveFormsModule,
     NgbNavModule,
     NgbDropdownModule,
-
+    FontAwesomeModule
   ],
 
   providers: [Users_Service,Posts_Service,{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },NgbActiveModal,{provide: LocationStrategy, useClass: PathLocationStrategy}],

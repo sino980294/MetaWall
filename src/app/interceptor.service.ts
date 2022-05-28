@@ -12,7 +12,7 @@ constructor(private JwtTokenServiceService : JwtTokenServiceService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const newRequest = req.clone({
       setHeaders: {
-        Authorization: 'bear' + ' ' + this.JwtTokenServiceService.getAccessToken()
+        Authorization: 'Bearer' + ' ' + this.JwtTokenServiceService.getAccessToken()
       }
     });
     console.log(newRequest)

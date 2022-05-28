@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { JwtTokenServiceService } from './../../service/jwtTolenService.service';
 import { Component, OnInit } from '@angular/core';
 import jwtDecode from 'jwt-decode';
+import { UserInfo } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
 
 @Component({
   selector: 'app-layout',
@@ -16,19 +17,12 @@ public userImage:string = ""
   ngOnInit() {
     this.getName()
   }
-  public userInfo = {
-    exp: 0,
-    iat: 0,
-    id: "",
-    userName: ""
-  }
+  public userInfo !:UserInfo|null
   getName(){
-    let token = this.JwtTokenServiceService.getAccessToken()
-    if(token){
-      this.userInfo =jwtDecode(token);
-      this.userName = this.userInfo.userName;
+    this.userInfo = this.JwtTokenServiceService.getUserInfo() ;
+    if(this.userInfo){
+      this.userName  = this.userInfo.userName
     }
-
   }
   updateUserUrl(){
     this.userImage = './assets/img/login/MetaWall.svg'

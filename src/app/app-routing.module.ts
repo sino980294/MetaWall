@@ -26,7 +26,7 @@ const routes: Routes = [
 },
 { path: 'login', component: LoginComponent },
 { path: 'creatAccount', component: CreatAccountComponent },
-  { path: '**',   redirectTo: '/login' },
+{ path: '**',   redirectTo: '/index' },
 ];
 
 @NgModule({

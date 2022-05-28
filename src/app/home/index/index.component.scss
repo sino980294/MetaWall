@@ -1,13 +1,54 @@
-.postUserImg{
+.postUserImg {
   height: 46px;
   width: 46px;
   border: 2px solid #000400;
   border-radius: 50%;
 }
-.postSection{
-  border:2px solid #000400;
+.postSection {
+  border: 2px solid #000400;
   box-shadow: 0px 3px 0px #000400;
   border-radius: 8px;
   margin-top: 20px;
   margin-bottom: 20px;
+  background-color: white;
+}
+.text-gray {
+  color: gray;
+  &:hover {
+    color: blue;
+  }
+}
+.text-blue {
+  color: blue;
+}
+.like-btn {
+  border: none;
+}
+.sendMessageDiv {
+  height: 40px;
+
+
+  .sendMessage {
+    width: 128px;
+    text-align: center;
+    background-color: #03438d;
+    color: white;
+  }
+}
+.userImgDiv {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 60px;
+  .UserImg {
+    height: 40px;
+    width: 40px;
+    border: 2px solid #000400;
+    border-radius: 50%;
+  }
+}
+.comment-body{
+  padding-left: 80px;
+}
+.comment-section{
+  background-color: #EFECE7;
 }
