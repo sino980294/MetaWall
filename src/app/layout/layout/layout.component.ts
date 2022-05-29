@@ -3,6 +3,7 @@ import { JwtTokenServiceService } from './../../service/jwtTolenService.service'
 import { Component, OnInit } from '@angular/core';
 import jwtDecode from 'jwt-decode';
 import { UserInfo } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
+import { faBell ,faThumbsUp} from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-layout',
@@ -14,6 +15,8 @@ export class LayoutComponent implements OnInit {
   constructor(private JwtTokenServiceService : JwtTokenServiceService,private router: Router) { }
 public userName:string = ""
 public userImage:string = ""
+public faBell = faBell;
+public faThumbsUp = faThumbsUp;
   ngOnInit() {
     this.getName()
   }

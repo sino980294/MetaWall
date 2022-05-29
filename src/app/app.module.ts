@@ -15,6 +15,8 @@ import { Posts_Service } from './app-info/typescript-angular-client-generated/ty
 import { InterceptorService } from './interceptor.service';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserInfoComponent } from './home/user-info/user-info.component';
+import { SendPostComponent } from './home/sendPost/sendPost.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CreatAccountComponent,
     LoginComponent,
     IndexComponent,
-    LayoutComponent
+    LayoutComponent,
+    UserInfoComponent,
+    SendPostComponent
    ],
   imports: [
     BrowserModule,

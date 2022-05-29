@@ -14,7 +14,7 @@
 }
 .text-gray {
   color: gray;
-  &:hover {
+  &.has-hover:hover {
     color: blue;
   }
 }
@@ -23,6 +23,7 @@
 }
 .like-btn {
   border: none;
+  background: none;
 }
 .sendMessageDiv {
   height: 40px;

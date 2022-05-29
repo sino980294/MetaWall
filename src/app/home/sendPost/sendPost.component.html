@@ -1,0 +1,15 @@
+<div class="col-12 TitleDiv">
+  張貼動態
+</div>
+<div class="my-5 container">
+ <form (ngSubmit)="sendPosts()" [formGroup]="sendPostForm">
+  <label>貼文內容</label>
+    <textarea type="text" class="w-100" formControlName="discussContent" rows="10"></textarea>
+    <button class="mt-3">上傳圖片</button>
+    <img [src]="sendPostForm.value['discussPhoto']" alt="" *ngIf="sendPostForm.value['discussPhoto'] != ''">
+    <p class="text-danger text-center mt-5">
+      {{postSendError}}
+    </p>
+    <button class="send-btn my-1">送出貼文</button>
+ </form>
+</div>

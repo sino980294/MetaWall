@@ -27,3 +27,33 @@ text-align: end;
     min-width: 60px;
   }
 }
+.sideBar{
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 2px solid #000400;
+}
+.sendPosts-btn{
+  background: #03438D 0% 0% no-repeat padding-box;
+box-shadow: -2px 2px 0px #000400;
+border: 2px solid #000400;
+border-radius: 8px;
+color: #FFFFFF;
+width: 100%;
+padding: 16px;
+
+
+}
+.sidebar-image{
+  aspect-ratio: 1;
+  border: 2px solid #000400;
+  border-radius: 50%;
+  width: 100%;
+  background-color: #E2EDFA;
+}
+.sidebar-svg-text{
+  font-size: 30px;
+}
+@media screen and (max-width:1200px) {
+  .sidebar-svg-text{
+    font-size: 16px;
+  }
+}

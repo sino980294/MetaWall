@@ -10,7 +10,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navs" ngbDropdownMenu>
               <button class="dropdown-item"ngbDropdownItem href="#">我的貼文牆</button>
-              <button class="dropdown-item"ngbDropdownItem href="#">修改個人資料</button>
+              <button class="dropdown-item"ngbDropdownItem routerLink="/userInfo" [queryParams]="{label:'Info'}">修改個人資料</button>
               <button class="dropdown-item" ngbDropdownItem (click)="logOut()">登出</button>
             </div>
           </li>
@@ -20,4 +20,54 @@
 
 
 </nav>
-<router-outlet></router-outlet>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-9">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-3">
+<div class="sideBar">
+  <div class="container">
+    <div class="my-3 mt-3">
+      <button class="sendPosts-btn"type="button" routerLink="/sendPost">張貼動態</button>
+    </div>
+    <div class="my-3 row">
+      <div class="col-4">
+        <img [src]="userImage" class="sidebar-image" alt=""(error)="updateUserUrl()">
+      </div>
+      <div class="col-8 d-flex justify-content-start align-items-center fw-bold">
+          {{userName}}
+      </div>
+    </div>
+    <div class="my-3 row">
+      <div class="col-4">
+        <div class="sidebar-image d-flex justify-content-center align-items-center" alt="">
+       <fa-icon [icon]="faBell" [class]="'text-center sidebar-svg-text'"></fa-icon>
+        </div>
+      </div>
+      <div class="col-8 d-flex justify-content-start align-items-center fw-bold">
+          追蹤名單(尚未開發)
+      </div>
+    </div>
+    <div class="my-3 row">
+      <div class="col-4">
+        <div class="sidebar-image d-flex justify-content-center align-items-center" alt="">
+       <fa-icon [icon]="faThumbsUp" [class]="'text-center sidebar-svg-text'"></fa-icon>
+        </div>
+      </div>
+      <div class="col-8 d-flex justify-content-start align-items-center fw-bold">
+          我按讚的文章(尚未開發)
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+
+  </div>
+
+
