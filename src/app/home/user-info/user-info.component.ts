@@ -44,7 +44,7 @@ passwordForm = new FormGroup({
     this.imgur$ = new Subject();
     this.ImgurService.imurgurPipe(this.imgur$).subscribe(res=>{
       if(res.success){
-        this.userInfo.userName = res.data.link;
+        this.userInfo.userPhoto = res.data.link;
         this.userInfoForm.patchValue({userPhoto:res.data.link})
       }else{
         alert('上傳錯誤')
