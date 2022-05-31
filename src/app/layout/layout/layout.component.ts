@@ -25,6 +25,7 @@ public faThumbsUp = faThumbsUp;
     this.userInfo = this.JwtTokenServiceService.getUserInfo() ;
     if(this.userInfo){
       this.userName  = this.userInfo.userName
+      this.userImage  = this.userInfo.userPhoto
     }
   }
   updateUserUrl(){
