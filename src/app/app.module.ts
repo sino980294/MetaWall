@@ -12,7 +12,7 @@ import { Users_Service } from '../app/app-info/typescript-angular-client-generat
 
 import { LoginComponent } from './login/login.component';
 import { Posts_Service } from './app-info/typescript-angular-client-generated/typescript-angular-client/api/posts_.service';
-import { InterceptorService } from './interceptor.service';
+import { InterceptorService } from './service/interceptor.service';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserInfoComponent } from './home/user-info/user-info.component';

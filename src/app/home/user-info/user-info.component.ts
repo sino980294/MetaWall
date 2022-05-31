@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Users_Service } from '../../app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -5,7 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { UserInfo } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
 import { JwtTokenServiceService } from 'src/app/service/jwtTolenService.service';
 import { FormControl, FormGroup } from '@angular/forms';
-
+import { ImgurService } from 'src/app/service/imgur.service';
+import{ ImgurClient  } from 'imgur';
 
 @Component({
   selector: 'app-user-info',
@@ -17,6 +19,7 @@ public pageLabel :string = ""
 userInfo !: UserInfo;
 userInfoSendError:string = '';
 PasswordSendError:string = ''
+imgur$ !:Subject<File>
 userInfoForm = new FormGroup({
   userName: new FormControl(''),
   userPhoto: new FormControl(''),
@@ -27,7 +30,8 @@ passwordForm = new FormGroup({
   confirmNewPassword:new FormControl('')
 })
   constructor(private activatedRoute: ActivatedRoute,private JwtTokenService: JwtTokenServiceService,
-    private UserService : Users_Service,private location : Location) { }
+    private UserService : Users_Service,private location : Location,
+    private ImgurService:ImgurService) { }
 
   ngOnInit(): void {
     this.getPageLabel()
@@ -37,6 +41,8 @@ passwordForm = new FormGroup({
       userPhoto: this.userInfo.userPhoto,
       gender: 'male'
     })
+    this.imgur$ = new Subject();
+    this.ImgurService.imurgurPipe(this.imgur$,this.userInfo.userPhoto)
   }
 getPageLabel(){
   this.activatedRoute.queryParams.subscribe(
@@ -44,6 +50,15 @@ getPageLabel(){
       this.pageLabel = params['label']
     }
   );
+}
+
+changeUserPhoto($event:Event){
+  const element = $event.currentTarget as HTMLInputElement;
+  let fileList: FileList | null = element.files;
+  if (fileList) {
+    this.imgur$.next(fileList[0])
+  }
+
 }
 getUserInfo() {
   this.userInfo = this.JwtTokenService.getUserInfo() ?? new UserInfo()

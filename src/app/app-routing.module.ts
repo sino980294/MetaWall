@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreatAccountComponent } from './creat-account/creat-account.component';
 import { LoginComponent } from './login/login.component';
-import { AuthGuardService } from './auth-guard.service';
+import { AuthGuardService } from './service/auth-guard.service';
 import { SendPostComponent } from './home/sendPost/sendPost.component';
 
 const routes: Routes = [

@@ -1,4 +1,4 @@
-import { JwtTokenServiceService } from './service/jwtTolenService.service';
+import { JwtTokenServiceService } from './jwtTolenService.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
