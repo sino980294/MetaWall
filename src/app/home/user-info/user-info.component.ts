@@ -42,7 +42,13 @@ passwordForm = new FormGroup({
       gender: 'male'
     })
     this.imgur$ = new Subject();
-    this.ImgurService.imurgurPipe(this.imgur$,this.userInfo.userPhoto)
+    this.ImgurService.imurgurPipe(this.imgur$).subscribe(res=>{
+      if(res.success){
+        this.userInfo.userPhoto = res.data.link
+      }else{
+        alert('上傳錯誤')
+      }
+  })
   }
 getPageLabel(){
   this.activatedRoute.queryParams.subscribe(
@@ -55,9 +61,11 @@ getPageLabel(){
 changeUserPhoto($event:Event){
   const element = $event.currentTarget as HTMLInputElement;
   let fileList: FileList | null = element.files;
+  console.log(element)
   if (fileList) {
     this.imgur$.next(fileList[0])
   }
+  console.log(this.userInfo)
 
 }
 getUserInfo() {

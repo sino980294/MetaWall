@@ -21,22 +21,16 @@ constructor(private http:HttpClient) { }
   ngOnInit(): void {
 
   }
-  imurgurPipe(imgur$:Subject<File>,imageUrl:string){
+  imurgurPipe(imgur$:Subject<File>){
     const client = new ImgurClient(this.a);
-    imgur$
+    return imgur$
     .pipe(switchMap(file=> this.convertFile(file)))
     .pipe(concatMap( base64 => client.upload({
         image: base64,
         type: 'base64',
         album: environment.imgurId
       })
-    )) .subscribe(res=>{
-        if(res.success){
-          imageUrl = res.data.link
-        }else{
-          alert('上傳錯誤')
-        }
-    })
+    ))
   }
 async pushImg(file:File){
 
