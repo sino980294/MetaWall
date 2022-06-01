@@ -55,6 +55,11 @@ export class SendPostComponent implements OnInit ,OnDestroy{
     })
   }
   uploadPhoto($event:Event){
-
+    const element = $event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    console.log(element)
+    if (fileList) {
+      this.imgur$.next(fileList[0])
+    }
   }
 }
