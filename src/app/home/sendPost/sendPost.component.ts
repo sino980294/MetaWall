@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { Posts_Service } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/api/posts_.service';
+import { ImgurService } from 'src/app/service/imgur.service';
 
 @Component({
   selector: 'app-sendPost',
   templateUrl: './sendPost.component.html',
   styleUrls: ['./sendPost.component.scss']
 })
-export class SendPostComponent implements OnInit {
+export class SendPostComponent implements OnInit ,OnDestroy{
 
   postSendError:string = ''
   sendPostForm = new FormGroup({
@@ -15,10 +17,26 @@ export class SendPostComponent implements OnInit {
     discussPhoto: new FormControl(''),
     tag: new FormControl('標籤 string')
   })
-  constructor(private postService: Posts_Service) { }
+  imgur$ !:Subject<File>
+  constructor(private postService: Posts_Service,private ImgurService:ImgurService) { }
 
   ngOnInit() {
+    this.InitImurgurPipe()
   }
+  ngOnDestroy(): void {
+    this.imgur$.unsubscribe();
+  }
+  InitImurgurPipe(){
+    this.imgur$ = new Subject();
+    this.ImgurService.imurgurPipe(this.imgur$).subscribe(res=>{
+      if(res.success){
+        this.sendPostForm.patchValue({discussPhoto:res.data.link})
+      }else{
+        alert('上傳錯誤')
+      }
+    })
+  }
+
   sendPosts(){
     this.postService.postsPost(this.sendPostForm.value).subscribe({
       next:(res)=>{
@@ -35,5 +53,8 @@ export class SendPostComponent implements OnInit {
       }
 
     })
+  }
+  uploadPhoto($event:Event){
+
   }
 }

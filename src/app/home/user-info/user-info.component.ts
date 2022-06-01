@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { Users_Service } from '../../app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfo } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
@@ -14,7 +14,7 @@ import{ ImgurClient  } from 'imgur';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit {
+export class UserInfoComponent implements OnInit,OnDestroy {
 public pageLabel :string = ""
 userInfo !: UserInfo;
 userInfoSendError:string = '';
@@ -32,6 +32,9 @@ passwordForm = new FormGroup({
   constructor(private activatedRoute: ActivatedRoute,private JwtTokenService: JwtTokenServiceService,
     private UserService : Users_Service,private location : Location,
     private ImgurService:ImgurService) { }
+  ngOnDestroy(): void {
+    this.imgur$.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.getPageLabel()
@@ -41,6 +44,10 @@ passwordForm = new FormGroup({
       userPhoto: this.userInfo.userPhoto,
       gender: 'male'
     })
+   this.InitImurgurPipe()
+
+  }
+  InitImurgurPipe(){
     this.imgur$ = new Subject();
     this.ImgurService.imurgurPipe(this.imgur$).subscribe(res=>{
       if(res.success){
@@ -49,7 +56,7 @@ passwordForm = new FormGroup({
       }else{
         alert('上傳錯誤')
       }
-  })
+    })
   }
 getPageLabel(){
   this.activatedRoute.queryParams.subscribe(

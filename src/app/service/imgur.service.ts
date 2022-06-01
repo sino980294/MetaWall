@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +12,7 @@ import ImgurClient from 'imgur';
 export class ImgurService implements OnInit {
 
 constructor(private http:HttpClient) { }
+
 
     a:Credentials = {
         clientId: environment.imgurAccount,
