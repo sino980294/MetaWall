@@ -1,3 +1,4 @@
+import { PatchPostComponent } from './home/PatchPost/PatchPost.component';
 import { UserInfoComponent } from './home/user-info/user-info.component';
 import { LayoutComponent } from './layout/layout/layout.component';
 import { IndexComponent } from './home/index/index.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
     {
       path:'sendPost',
       component:SendPostComponent
+    },
+    {
+      path:'patchPost',
+      component:PatchPostComponent
     },
     {
       path:'',

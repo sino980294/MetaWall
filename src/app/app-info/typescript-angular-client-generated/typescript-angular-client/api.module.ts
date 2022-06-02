@@ -3,7 +3,9 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
+import { Pay_Service } from './api/pay_.service';
 import { Posts_Service } from './api/posts_.service';
+import { TpAuth_Service } from './api/tpAuth_.service';
 import { Users_Service } from './api/users_.service';
 
 @NgModule({
@@ -11,11 +13,13 @@ import { Users_Service } from './api/users_.service';
   declarations: [],
   exports:      [],
   providers: [
+    Pay_Service,
     Posts_Service,
+    TpAuth_Service,
     Users_Service ]
 })
 export class ApiModule {
-    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
+    public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
         return {
             ngModule: ApiModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]

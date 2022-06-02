@@ -57,11 +57,11 @@
 
       </button>
 
-      <ng-container *ngIf="post.likes == 0">
+      <ng-container *ngIf="post.likes.length == 0">
         <span class="text-gray">成為第一個按讚的朋友</span>
       </ng-container>
-      <ng-container *ngIf="post.likes != 0">
-        {{post.likes}}
+      <ng-container *ngIf="post.likes.length != 0">
+        {{post.likes.length}}
       </ng-container>
     </div>
     <form (ngSubmit)="sendComment(post)">

@@ -61,9 +61,9 @@ export class IndexComponent implements OnInit {
   likeThis(posts: PostDatapostsViewModel) {
     posts.isLike = !posts.isLike;
     if (posts.isLike) {
-      posts.likes += 1;
+      posts.likes.length += 1;
     } else {
-      posts.likes -= 1;
+      posts.likes.length -= 1;
     }
   }
   getName() {

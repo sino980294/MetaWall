@@ -1,3 +1,4 @@
+import { PatchPostComponent } from './home/PatchPost/PatchPost.component';
 import { LayoutComponent } from './layout/layout/layout.component';
 import { IndexComponent } from './home/index/index.component';
 import { NgModule } from '@angular/core';
@@ -26,7 +27,8 @@ import { SendPostComponent } from './home/sendPost/sendPost.component';
     IndexComponent,
     LayoutComponent,
     UserInfoComponent,
-    SendPostComponent
+    SendPostComponent,
+    PatchPostComponent
    ],
   imports: [
     BrowserModule,

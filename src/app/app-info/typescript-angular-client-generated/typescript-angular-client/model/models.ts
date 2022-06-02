@@ -32,7 +32,7 @@ export class  PostDatapostsViewModel{
     "discussContent": string
     "discussPhoto": string
     "id": string
-    "likes": number
+    "likes": string[]
     "tag": string
     "userData": UserInfo
     "createAt": Date

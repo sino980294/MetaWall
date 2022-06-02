@@ -1,8 +1,8 @@
 <div class="col-12 TitleDiv">
-  張貼動態
+  修改動態
 </div>
 <div class="my-5 container">
- <form (ngSubmit)="sendPosts()" [formGroup]="sendPostForm">
+ <form (ngSubmit)="patchPosts()" [formGroup]="sendPostForm">
   <label>貼文內容</label>
     <textarea type="text" class="w-100" formControlName="discussContent" rows="10"></textarea>
     <input #fileInput type="file" (change)="uploadPhoto($event)" style="display:none;" />
@@ -14,3 +14,4 @@
     <button class="send-btn my-1">送出貼文</button>
  </form>
 </div>
+

@@ -15,7 +15,6 @@ import { Inject, Injectable, Optional }                      from '@angular/core
 import { HttpClient, HttpHeaders, HttpParams,
          HttpResponse, HttpEvent }                           from '@angular/common/http';
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
-
 import { Observable }                                        from 'rxjs';
 
 import { userSignUpSearchModel } from '../model/models';
@@ -57,8 +56,95 @@ export class Users_Service {
 
 
     /**
-     *
-     *   登入  &lt;ul&gt;  &lt;li&gt;登入以 mail 為帳號&lt;/li&gt;  &lt;li&gt;忘記密碼就完蛋了 (去資料庫撈是加密的也沒用)，密碼由 Token 解密轉換&lt;/li&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
+     * 新增單筆會員 (後台)
+     * 新增單筆會員 (後台)
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public usersAdminCreatedUserPost(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public usersAdminCreatedUserPost(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public usersAdminCreatedUserPost(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public usersAdminCreatedUserPost(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (apiKeyAuth) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            queryParameters = queryParameters.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/users/admin/createdUser`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 列出全部會員 (後台)
+     * 列出全部會員 (後台)
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public usersAdminListUsersGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public usersAdminListUsersGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public usersAdminListUsersGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public usersAdminListUsersGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (apiKeyAuth) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            queryParameters = queryParameters.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<any>(`${this.basePath}/users/admin/listUsers`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 使用者登入
+     *   &lt;ul&gt;  &lt;li&gt;登入以 mail 為帳號&lt;/li&gt;  &lt;li&gt;忘記密碼就完蛋了 (去資料庫撈是加密的也沒用)，密碼由 Token 解密轉換&lt;/li&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
      * @param body
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -99,8 +185,8 @@ export class Users_Service {
     }
 
     /**
-     *
-     *   取得登入者個人資訊  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
+     * 取得登入者個人資訊
+     *   &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -142,8 +228,8 @@ export class Users_Service {
     }
 
     /**
-     *
-     *   修改會員資料  &lt;ul&gt;  &lt;li&gt;帶入 user Token，格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt;&lt;/li&gt;  &lt;li&gt;忘記密碼就完蛋了 (去資料庫撈是加密的也沒用)，密碼由 Token 解密轉換。&lt;/li&gt;  &lt;li&gt;欄位 &lt;code&gt;\&quot;gender\&quot;&lt;/code&gt; 只能接受 &lt;code&gt;\&quot;male\&quot;, \&quot;female\&quot;&lt;/code&gt;。&lt;/li&gt;  &lt;/ul&gt;
+     * 修改會員資料
+     *   &lt;ul&gt;  &lt;li&gt;帶入 user Token，格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt;&lt;/li&gt;  &lt;li&gt;忘記密碼就完蛋了 (去資料庫撈是加密的也沒用)，密碼由 Token 解密轉換。&lt;/li&gt;  &lt;li&gt;欄位 &lt;code&gt;\&quot;gender\&quot;&lt;/code&gt; 只能接受 &lt;code&gt;\&quot;male\&quot;, \&quot;female\&quot;&lt;/code&gt;。&lt;/li&gt;  &lt;/ul&gt;
      * @param body 資料格式
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -192,8 +278,8 @@ export class Users_Service {
     }
 
     /**
-     *
-     *   註冊  &lt;ul&gt;  &lt;li&gt;密碼產生 Token 後至其他 users API 使用&lt;/li&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;欄位 &lt;code&gt;\&quot;gender\&quot;&lt;/code&gt; 只能接受 &lt;code&gt;\&quot;male\&quot;, \&quot;female\&quot;&lt;/code&gt;。&lt;/li&gt;  &lt;/ul&gt;
+     * 使用者註冊
+     *   &lt;ul&gt;  &lt;li&gt;密碼產生 Token 後至其他 users API 使用&lt;/li&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;欄位 &lt;code&gt;\&quot;gender\&quot;&lt;/code&gt; 只能接受 &lt;code&gt;\&quot;male\&quot;&lt;/code&gt;、&lt;code&gt;\&quot;female\&quot;&lt;/code&gt;、&lt;code&gt;\&quot;\&quot;&lt;/code&gt;。&lt;/li&gt;  &lt;/ul&gt;
      * @param body
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -234,8 +320,8 @@ export class Users_Service {
     }
 
     /**
-     *
-     *   修改會員資料  &lt;ul&gt;  &lt;li&gt;帶入 user Token，格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt;&lt;/li&gt;  &lt;li&gt;忘記密碼就完蛋了 (去資料庫撈是加密的也沒用)，密碼由 Token 解密轉換。&lt;/li&gt;  &lt;/ul&gt;
+     * 修改會員密碼
+     *   &lt;ul&gt;  &lt;li&gt;帶入 user Token，格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt;&lt;/li&gt;  &lt;li&gt;忘記密碼就完蛋了 (去資料庫撈是加密的也沒用)，密碼由 Token 解密轉換。&lt;/li&gt;  &lt;/ul&gt;
      * @param body 資料格式
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

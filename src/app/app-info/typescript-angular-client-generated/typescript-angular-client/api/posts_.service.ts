@@ -20,6 +20,7 @@ import { Observable }                                      from 'rxjs';
 
 import { commentsViewModel, PostViewModel, sendCommentSearchModel, UserSignUpViewModel } from '../model/models';
 
+
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
@@ -57,8 +58,8 @@ export class Posts_Service {
 
 
     /**
-     *
-     *   刪除單筆貼文留言  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
+     * 刪除單筆貼文留言
+     *   &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
      * @param id   &lt;ul&gt;  &lt;li&gt;取得特定使用者的所有貼文，關連留言訊息資料格式。&lt;/li&gt;  &lt;li&gt;Params Path Variables &lt;code&gt;:id&lt;/code&gt; (comment ID)&lt;/li&gt;  &lt;/ul&gt;
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -105,7 +106,7 @@ export class Posts_Service {
     }
 
     /**
-     *
+     * 刪除所有貼文
      * 刪除所有貼文
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -148,8 +149,8 @@ export class Posts_Service {
     }
 
     /**
-     *
-     *   &lt;p&gt;取得所有貼文。&lt;/p&gt;  參數用法：  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;&lt;code&gt;postsLength&lt;/code&gt; 在相關網址參數運算下，執行後回傳資料長度。&lt;/li&gt;  &lt;/ul&gt;
+     * 取得所有貼文
+     * 取得所有貼文。  &lt;p&gt;參數用法：&lt;/p&gt;  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;&lt;code&gt;postsLength&lt;/code&gt; 在相關網址參數運算下，執行後回傳資料長度。&lt;/li&gt;  &lt;/ul&gt;
      * @param timeSort   &lt;code&gt;timeSort&lt;/code&gt; 參數：  &lt;ul&gt;  &lt;li&gt;預設新到舊&lt;/li&gt;  &lt;li&gt;是否有 &lt;code&gt;asc&lt;/code&gt; 值？，有值有舊到新；沒值有新到舊。&lt;/li&gt;  &lt;/ul&gt;
      * @param q   &lt;code&gt;q&lt;/code&gt; 參數：  &lt;ul&gt;  &lt;li&gt;查找物件中的留言 &lt;code&gt;discussContent&lt;/code&gt;。&lt;/li&gt;  &lt;li&gt;用正則表達式以 JS 轉 mongDB 語法 &lt;code&gt;.find( parName: /&lt;查尋字串&gt;/)&lt;/code&gt;。&lt;/li&gt;  &lt;/ul&gt;
      * @param pageNum   &lt;code&gt;pageNum&lt;/code&gt; 參數：取頁面資料筆數長度 (目前分頁數 &lt;code&gt;0&lt;/code&gt; 為第一頁)  &lt;ul&gt;  &lt;li&gt;判斷網址參數 &lt;code&gt;pageSize&lt;/code&gt; 是否有值，若無值會段 &lt;code&gt;0&lt;/code&gt; 取出所有資料。&lt;/li&gt;  &lt;li&gt;參數以 &lt;code&gt;1&lt;/code&gt; 累計。&lt;/li&gt;  &lt;/ul&gt;
@@ -211,8 +212,8 @@ export class Posts_Service {
     }
 
     /**
-     *
-     *   新增貼文留言功能  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;Heders Token 指定留言 user (&lt;code&gt;commentUser&lt;/code&gt;)。&lt;/li&gt;  &lt;li&gt;網址路由 &lt;code&gt;:id&lt;/code&gt; 傳入 post id 在特定貼文中留言。&lt;/li&gt;  &lt;li&gt;成功留言將資料寫入 &lt;code&gt;Comment&lt;/code&gt; collection 中建出 document。&lt;/li&gt;  &lt;/ul&gt;
+     * 新增貼文留言功能
+     *   &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;Heders Token 指定留言 user (&lt;code&gt;commentUser&lt;/code&gt;)。&lt;/li&gt;  &lt;li&gt;網址路由 &lt;code&gt;:id&lt;/code&gt; 傳入 post id 在特定貼文中留言。&lt;/li&gt;  &lt;li&gt;成功留言將資料寫入 &lt;code&gt;Comment&lt;/code&gt; collection 中建出 document。&lt;/li&gt;  &lt;/ul&gt;
      * @param id Params path Variables &lt;code&gt;:id&lt;/code&gt; (posts ID)
      * @param body Body 資料格式
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -269,8 +270,8 @@ export class Posts_Service {
     }
 
     /**
-     *
-     *   刪除單筆貼文  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;網址路由以 &lt;code&gt;:id&lt;/code&gt; 傳入參數，直接針對 Posts 中的 document id 進行刪除。&lt;/li&gt;  &lt;/ul&gt;
+     * 刪除單筆貼文
+     *   &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;網址路由以 &lt;code&gt;:id&lt;/code&gt; 傳入參數，直接針對 Posts 中的 document id 進行刪除。&lt;/li&gt;  &lt;/ul&gt;
      * @param id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -317,8 +318,202 @@ export class Posts_Service {
     }
 
     /**
-     *
-     *   更新單筆貼文  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
+     * 取得單筆貼文
+     * 取得單筆貼文  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;網址路由以 &lt;code&gt;:id&lt;/code&gt; 傳入參數，直接針對 Posts 中的 document id 進行取得資料。&lt;/li&gt;  &lt;/ul&gt;
+     * @param id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postsIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public postsIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public postsIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public postsIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling postsIdGet.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (apiKeyAuth) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            queryParameters = queryParameters.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<any>(`${this.basePath}/posts/${encodeURIComponent(String(id))}`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 刪除單筆貼文按讚
+     *   &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;網址路由以 &lt;code&gt;:id&lt;/code&gt; 傳入參數，直接針對 Posts 中的 userID 進行刪除按讚。&lt;/li&gt;  &lt;/ul&gt;
+     * @param id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postsIdLikesDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public postsIdLikesDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public postsIdLikesDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public postsIdLikesDelete(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling postsIdLikesDelete.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (apiKeyAuth) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            queryParameters = queryParameters.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.delete<any>(`${this.basePath}/posts/${encodeURIComponent(String(id))}/likes`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 新增與移除單筆貼文按讚
+     *   &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;網址路由以 &lt;code&gt;:id&lt;/code&gt; 傳入參數，直接針對 Posts 中的 postID 進行新增或移除按讚。&lt;/li&gt;  &lt;/ul&gt;
+     * @param id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postsIdLikesPatch(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public postsIdLikesPatch(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public postsIdLikesPatch(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public postsIdLikesPatch(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling postsIdLikesPatch.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (apiKeyAuth) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            queryParameters = queryParameters.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.patch<any>(`${this.basePath}/posts/${encodeURIComponent(String(id))}/likes`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 新增單筆貼文按讚
+     *   &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;網址路由以 &lt;code&gt;:id&lt;/code&gt; 傳入參數，直接針對 Posts 中的 postID 進行新增按讚。&lt;/li&gt;  &lt;/ul&gt;
+     * @param id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postsIdLikesPost(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public postsIdLikesPost(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public postsIdLikesPost(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public postsIdLikesPost(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling postsIdLikesPost.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (apiKeyAuth) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            queryParameters = queryParameters.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/posts/${encodeURIComponent(String(id))}/likes`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 更新單筆貼文
+     * 更新單筆貼文  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
      * @param id
      * @param body Body 資料格式
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -375,16 +570,16 @@ export class Posts_Service {
     }
 
     /**
-     *
-     *   新增單筆貼文  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;新增貼文需先有 user.id 登入取得 Tokne&lt;/li&gt;  &lt;li&gt;資料格式查看必填欄位，點按下方 Model 切換後，屬性欄位名稱的後方紅色的 &lt;code&gt;*&lt;/code&gt;&lt;/li&gt;  &lt;li&gt;透過 user.id 向 posts 的屬性欄位 &lt;code&gt;userData&lt;/code&gt; 關連。&lt;/li&gt;  &lt;/ul&gt;
+     * 新增單筆貼文
+     * 新增單筆貼文  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;新增貼文需先有 user.id 登入取得 Tokne&lt;/li&gt;  &lt;li&gt;資料格式查看必填欄位，點按下方 Model 切換後，屬性欄位名稱的後方紅色的 &lt;code&gt;*&lt;/code&gt;&lt;/li&gt;  &lt;li&gt;透過 user.id 向 posts 的屬性欄位 &lt;code&gt;userData&lt;/code&gt; 關連。&lt;/li&gt;  &lt;/ul&gt;
      * @param body
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postsPost(body: any, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public postsPost(body: any, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public postsPost(body: any, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public postsPost(body: any, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postsPost(body: Body, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public postsPost(body: Body, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public postsPost(body: Body, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public postsPost(body: Body, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postsPost.');
@@ -428,8 +623,8 @@ export class Posts_Service {
     }
 
     /**
-     *
-     *   取得特定使用者的所有貼文，關連留言訊息。  &lt;ul&gt;  &lt;li&gt;不帶 Token 在可對外查看。&lt;/li&gt;  &lt;/ul&gt;
+     * 取得特定使用者的所有貼文，關連留言訊息
+     *   &lt;ul&gt;  &lt;li&gt;不帶 Token 在可對外查看。&lt;/li&gt;  &lt;/ul&gt;
      * @param id   &lt;ul&gt;  &lt;li&gt;取得特定使用者的所有貼文，關連留言訊息資料格式。&lt;/li&gt;  &lt;li&gt;Params Path Variables &lt;code&gt;:id&lt;/code&gt; (user ID)&lt;/li&gt;  &lt;/ul&gt;
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
