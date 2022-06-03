@@ -61,9 +61,9 @@ export class Pay_Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public payGet(observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public payGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public payGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public payGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public payGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public payGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public payGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});

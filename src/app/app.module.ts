@@ -1,3 +1,4 @@
+
 import { PatchPostComponent } from './home/PatchPost/PatchPost.component';
 import { LayoutComponent } from './layout/layout/layout.component';
 import { IndexComponent } from './home/index/index.component';
@@ -9,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreatAccountComponent } from './creat-account/creat-account.component';
 import { NgbActiveModal, NgbDropdown, NgbDropdownModule, NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { Users_Service } from '../app/app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
+import { APIS } from '../app/app-info/typescript-angular-client-generated/typescript-angular-client/api/api';
 
 import { LoginComponent } from './login/login.component';
 import { Posts_Service } from './app-info/typescript-angular-client-generated/typescript-angular-client/api/posts_.service';
@@ -43,7 +44,7 @@ import { SendPostComponent } from './home/sendPost/sendPost.component';
     FontAwesomeModule
   ],
 
-  providers: [Users_Service,Posts_Service,{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },NgbActiveModal,{provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [APIS,{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },NgbActiveModal,{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -32,7 +32,7 @@ export class  PostDatapostsViewModel{
     "discussContent": string
     "discussPhoto": string
     "id": string
-    "likes": string[]
+    "likes": UserInfo[]
     "tag": string
     "userData": UserInfo
     "createAt": Date
@@ -47,6 +47,7 @@ export class UserInfo {
   "userName": string
   "userPhoto": string
   "_id":string
+  "IsCarrier":boolean
 }
 
 export class commentsViewModel{

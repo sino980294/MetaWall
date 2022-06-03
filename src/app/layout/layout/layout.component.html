@@ -11,6 +11,7 @@
             <div class="dropdown-menu" aria-labelledby="navs" ngbDropdownMenu>
               <button class="dropdown-item"ngbDropdownItem href="#">我的貼文牆</button>
               <button class="dropdown-item"ngbDropdownItem routerLink="/userInfo" [queryParams]="{label:'Info'}">修改個人資料</button>
+              <button class="dropdown-item" ngbDropdownItem (click)="addCarrier()">加入會員</button>
               <button class="dropdown-item" ngbDropdownItem (click)="logOut()">登出</button>
             </div>
           </li>
