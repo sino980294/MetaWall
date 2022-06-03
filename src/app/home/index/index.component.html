@@ -53,7 +53,7 @@
     <div class="my-2">
       <button class="like-btn" (click)="likeThis(post)">
         <fa-icon [icon]="faThumbsUp" [size]="'lg'"
-          [class]="{'text-blue':post.isLike,'text-gray':!post.isLike,'has-hover':!post.isLike}"></fa-icon>
+          [class]="{'text-blue':Islike(post.likes),'text-gray':Islike(post.likes),'has-hover':Islike(post.likes)}"></fa-icon>
 
       </button>
 

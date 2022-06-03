@@ -19,11 +19,11 @@ export class IndexComponent implements OnInit {
   public faThumbsUp = faThumbsUp;
   public faEllipsisVertical = faEllipsisVertical;
   public Ilike = false;
-  userInfo !: UserInfo;
+  public userInfo !: UserInfo;
 
   constructor(private postService: Posts_Service, private JwtTokenService: JwtTokenServiceService,
-    private router:Router
-    ) { }
+    private router: Router
+  ) { }
 
   searchForm = new FormGroup({
     timeSort: new FormControl('desc'),
@@ -62,12 +62,10 @@ export class IndexComponent implements OnInit {
     this.userInfo.userPhoto = './assets/img/login/MetaWall.svg';
   }
   likeThis(posts: PostDatapostsViewModel) {
-    posts.isLike = !posts.isLike;
-    if (posts.isLike) {
-      posts.likes.length += 1;
-    } else {
-      posts.likes.length -= 1;
-    }
+    this.postService.postsIdLikesPatch(posts._id).subscribe(res => {
+      posts.likes = res.data.likes
+      console.log(posts.likes)
+    })
   }
   getName() {
     this.userInfo = this.JwtTokenService.getUserInfo() ?? new UserInfo()
@@ -94,9 +92,9 @@ export class IndexComponent implements OnInit {
   deleteMessage(id: string) {
     this.postService.postsIdDelete(id).subscribe({
       next: (res) => {
-        if (res.status == 'success'){
+        if (res.status == 'success') {
           alert('刪除成功')
-          this.postMeaage.data.posts = this.postMeaage.data.posts.filter(x=>x._id != id)
+          this.postMeaage.data.posts = this.postMeaage.data.posts.filter(x => x._id != id)
         }
         else
           alert('刪除失敗')
@@ -106,9 +104,15 @@ export class IndexComponent implements OnInit {
       }
     })
   }
-  EditMessage(id: string){
+  EditMessage(id: string) {
     console.log('transfer to postid' + id)
-    this.router.navigate(['/patchPost',{'id':id}])
+    this.router.navigate(['/patchPost', { 'id': id }])
+  }
+
+  Islike(likes: UserInfo[]) {
+    return likes.some(x => x._id == this.userInfo.id)
+
   }
 }
+
 
