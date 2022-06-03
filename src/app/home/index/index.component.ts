@@ -6,6 +6,7 @@ import { PostViewModel, comment } from 'src/app/app-info/typescript-angular-clie
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { JwtTokenServiceService } from 'src/app/service/jwtTolenService.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -20,7 +21,9 @@ export class IndexComponent implements OnInit {
   public Ilike = false;
   userInfo !: UserInfo;
 
-  constructor(private postService: Posts_Service, private JwtTokenService: JwtTokenServiceService) { }
+  constructor(private postService: Posts_Service, private JwtTokenService: JwtTokenServiceService,
+    private router:Router
+    ) { }
 
   searchForm = new FormGroup({
     timeSort: new FormControl('desc'),
@@ -91,8 +94,10 @@ export class IndexComponent implements OnInit {
   deleteMessage(id: string) {
     this.postService.postsIdDelete(id).subscribe({
       next: (res) => {
-        if (res.status == 'success')
+        if (res.status == 'success'){
           alert('刪除成功')
+          this.postMeaage.data.posts = this.postMeaage.data.posts.filter(x=>x._id != id)
+        }
         else
           alert('刪除失敗')
       },
@@ -102,7 +107,8 @@ export class IndexComponent implements OnInit {
     })
   }
   EditMessage(id: string){
-
+    console.log('transfer to postid' + id)
+    this.router.navigate(['/patchPost',{'id':id}])
   }
 }
 

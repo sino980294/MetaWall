@@ -1,7 +1,7 @@
 <div class="col-12 TitleDiv">
   修改動態
 </div>
-<div class="my-5 container">
+<div class="my-5 container" *ngIf="IsMessageGet">
  <form (ngSubmit)="patchPosts()" [formGroup]="sendPostForm">
   <label>貼文內容</label>
     <textarea type="text" class="w-100" formControlName="discussContent" rows="10"></textarea>
@@ -11,7 +11,7 @@
     <p class="text-danger text-center mt-5">
       {{postSendError}}
     </p>
-    <button class="send-btn my-1">送出貼文</button>
+    <button class="send-btn my-1">修改貼文</button>
  </form>
 </div>
 
