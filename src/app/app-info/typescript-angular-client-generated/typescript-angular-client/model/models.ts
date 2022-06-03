@@ -86,3 +86,17 @@ export class comment{
 // post: "628f48f0e623dbaab05758f5"
 // _id: "629248737468fe3bb19dcf9f"
 // }
+export class premiumMemberInfo{
+  "status": string
+  "data": {
+    "premiumMember": {
+      "paid": number
+      "pay": string,
+      "startAt": string
+    }
+    "_id": string
+    "userName": string
+    "photo": string
+    "gender": string
+}
+}
