@@ -9,39 +9,44 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { SendPostComponent } from './home/sendPost/sendPost.component';
 
-const routes: Routes = [
 
-{
-  canActivate:[AuthGuardService],
-  path:'',
-  component: LayoutComponent,
-  children:[
-    {
-      path:'index',
-      component:IndexComponent
-    },
-    {
-      path:'userInfo',
-      component:UserInfoComponent
-    },
-    {
-      path:'sendPost',
-      component:SendPostComponent
-    },
-    {
-      path:'patchPost',
-      component:PatchPostComponent
-    },
-    {
-      path:'',
-      redirectTo:'/index',
-      pathMatch:'full'
-    }
-  ]
-},
-{ path: 'login', component: LoginComponent },
-{ path: 'creatAccount', component: CreatAccountComponent },
-{ path: '**',   redirectTo: '/index' },
+
+const routes: Routes = [
+  // {
+  //   path: '',component: GetTokenServiceService,pathMatch: 'full'
+  // },
+  {
+    canActivate: [AuthGuardService],
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'index',
+        component: IndexComponent
+      },
+      {
+        path: 'userInfo',
+        component: UserInfoComponent
+      },
+      {
+        path: 'sendPost',
+        component: SendPostComponent
+      },
+      {
+        path: 'patchPost',
+        component: PatchPostComponent
+      },
+      {
+        path: '',
+        redirectTo: '/index',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: 'creatAccount', component: CreatAccountComponent },
+
+  { path: '**', redirectTo: '/index' }
 ];
 
 @NgModule({

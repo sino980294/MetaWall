@@ -24,4 +24,7 @@ export class JwtTokenServiceService {
       return null
     }
   }
+  setToken(token:string){
+    localStorage.setItem("token", token);
+  }
 }

@@ -20,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserInfoComponent } from './home/user-info/user-info.component';
 import { SendPostComponent } from './home/sendPost/sendPost.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

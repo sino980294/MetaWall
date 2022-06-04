@@ -14,6 +14,12 @@ constructor(private JwtTokenServiceService: JwtTokenServiceService, private rout
       console.log(true)
       return true
     }else{
+      const token :string = route.queryParams['t']
+      console.log(token)
+      if(token){
+        this.JwtTokenServiceService.setToken(token)
+        this.router.navigate(['/index']);
+      }
       console.log(123);
        this.router.navigate(['/login']);
        return false;

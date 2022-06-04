@@ -1,3 +1,4 @@
+import { JwtTokenServiceService } from './../service/jwtTolenService.service';
 import { TpAuth_Service } from './../app-info/typescript-angular-client-generated/typescript-angular-client/api/tpAuth_.service';
 import { Router } from '@angular/router';
 import { Users_Service } from './../app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
@@ -12,7 +13,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: Users_Service, private router: Router,private TpAuth_Service:TpAuth_Service) { }
+  constructor(private userService: Users_Service, private router: Router,private TpAuth_Service:TpAuth_Service,
+    private JwtTokenServiceService:JwtTokenServiceService) { }
   public errorMessage: string = "";
   ngOnInit() {
   }
@@ -25,8 +27,7 @@ export class LoginComponent implements OnInit {
     this.userService.usersLoginPost(this.loginForm.value).subscribe({
       next: (res) => {
         console.log(res)
-        localStorage.setItem("token", res.data.token);
-
+        this.JwtTokenServiceService.setToken(res.data.token)
         this.router.navigate(['/index']);
       },
       error: (error) => {
