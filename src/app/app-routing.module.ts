@@ -8,13 +8,14 @@ import { CreatAccountComponent } from './creat-account/creat-account.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { SendPostComponent } from './home/sendPost/sendPost.component';
+import { ThirdLoginComponent } from './login/thirdLogin/thirdLogin.component';
 
 
 
 const routes: Routes = [
-  // {
-  //   path: '',component: GetTokenServiceService,pathMatch: 'full'
-  // },
+  {
+    path: 'thirdLogin',component: ThirdLoginComponent,pathMatch: 'full'
+  },
   {
     canActivate: [AuthGuardService],
     path: '',
