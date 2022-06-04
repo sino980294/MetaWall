@@ -19,6 +19,7 @@
 
                     <input type="text" placeholder="Email" formControlName="email" class="my-2">
                     <input type="password" placeholder="Password" formControlName="password" class="my-2">
+                    <button type="button" class="my-2 login-btn w-25" (click)="googleLogin()">google登入</button>
                     {{errorMessage}}
                     <button class="login-btn mb-2 ">登入</button>
                     <a routerLink="/creatAccount">註冊帳號
