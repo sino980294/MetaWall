@@ -19,12 +19,17 @@
 
                     <input type="text" placeholder="Email" formControlName="email" class="my-2">
                     <input type="password" placeholder="Password" formControlName="password" class="my-2">
-                    <a type="button" class="my-2 login-btn" href="https://damp-plateau-24758.herokuapp.com/tp-auth/google">google登入</a>
+
                     {{errorMessage}}
                     <button class="login-btn mb-2 ">登入</button>
                     <a routerLink="/creatAccount">註冊帳號
 
                     </a>
+                    <div class="d-flex my-2">
+                      <a type="button" class="my-2 login-third text-" href="https://damp-plateau-24758.herokuapp.com/tp-auth/google"><fa-icon [icon]="faGoogle" [class]="'text-center sidebar-svg-text'" [size]="'3x'"></fa-icon></a>
+                      <a type="button" class="my-2 login-third ms-3" href="https://damp-plateau-24758.herokuapp.com/tp-auth/facebook"><fa-icon [icon]="faFacebook" [class]="'text-center sidebar-svg-text'"[size]="'3x'"></fa-icon></a>
+
+                    </div>
                   </form>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Users_Service } from './../app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { faGoogle,faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 
 
 @Component({
@@ -16,6 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(private userService: Users_Service, private router: Router,private TpAuth_Service:TpAuth_Service,
     private JwtTokenServiceService:JwtTokenServiceService) { }
   public errorMessage: string = "";
+  public faGoogle = faGoogle
+  public faFacebook = faFacebookSquare
   ngOnInit() {
   }
   loginForm = new FormGroup({
