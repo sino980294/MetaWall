@@ -39,9 +39,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getPageLabel()
-    if(this.pageLabel == 'premiumMember'){
       this.getPremiumInfo()
-    }
     this.getUserInfo()
     this.userInfoForm.setValue({
       userName: this.userInfo.userName,
