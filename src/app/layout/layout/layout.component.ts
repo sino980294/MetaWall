@@ -1,9 +1,10 @@
+import { Posts_Service } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/api/posts_.service';
 import { Pay_Service } from '../../app-info/typescript-angular-client-generated/typescript-angular-client/api/pay_.service';
 import { Router } from '@angular/router';
 import { JwtTokenServiceService } from './../../service/jwtTolenService.service';
 import { Component, OnInit } from '@angular/core';
 import jwtDecode from 'jwt-decode';
-import { UserInfo } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
+import { PostDatapostsViewModel, UserInfo } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
 import { faBell ,faThumbsUp} from '@fortawesome/free-regular-svg-icons';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,12 +16,13 @@ import { faL } from '@fortawesome/free-solid-svg-icons';
 export class LayoutComponent implements OnInit {
 
   constructor(private JwtTokenServiceService : JwtTokenServiceService,private router: Router,
-    private Pay_Service:Pay_Service) { }
+    private Pay_Service:Pay_Service,private Posts_Service:Posts_Service) { }
 public userName:string = ""
 public userImage:string = ""
 public userIsCarrier:boolean = false;
 public faBell = faBell;
 public faThumbsUp = faThumbsUp;
+
   ngOnInit() {
     this.getName()
   }
@@ -55,4 +57,9 @@ form.submit()
 document.body.removeChild(div)
 })
   }
+  getFollowers(){
+    this.router.navigate(['/following', { 'id': this.userInfo?.id }])
+
+  }
+
 }

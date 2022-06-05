@@ -1,3 +1,4 @@
+import { UserPostComponent } from './home/userPost/userPost.component';
 
 import { PatchPostComponent } from './home/PatchPost/PatchPost.component';
 import { LayoutComponent } from './layout/layout/layout.component';
@@ -19,6 +20,8 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@a
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserInfoComponent } from './home/user-info/user-info.component';
 import { SendPostComponent } from './home/sendPost/sendPost.component';
+import { FollowingComponent } from './home/following/following.component';
+import { DateToNowPipe } from './pipe/DateToNow.pipe';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { SendPostComponent } from './home/sendPost/sendPost.component';
     LayoutComponent,
     UserInfoComponent,
     SendPostComponent,
-    PatchPostComponent
+    PatchPostComponent,
+    FollowingComponent,
+    DateToNowPipe,
+    UserPostComponent
    ],
   imports: [
     BrowserModule,

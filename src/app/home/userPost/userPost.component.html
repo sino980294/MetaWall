@@ -1,3 +1,117 @@
-<div class="col-12 TitleDiv">
-  修改動態
+<div class="col-12 TitleDiv container mb-3" *ngIf="postMeaage.data?.posts != undefined">
+  <div class="row my-3">
+    <div class="col-auto me-3">
+      <img [src]="postMeaage.data.posts[0].userData.userPhoto" alt="" class="postUserImg" (error)="updateUserUrl(postMeaage.data.posts[0].userData)">
+    </div>
+    <div class="col-auto text-start">
+      {{postMeaage.data.posts[0].userData.userName}}<br />
+      {{postMeaage.data.posts[0].createAt|date:"YYYY-MM-dd hh:mm:ss"}}
+    </div>
+    <div class="col-3 ms-auto">
+      <button class="follow-btn" *ngIf="!checkFollow(postMeaage.data.posts[0].userData._id)" (click)="follow(postMeaage.data.posts[0].userData)">追蹤</button>
+      <button class="follow-btn" *ngIf="checkFollow(postMeaage.data.posts[0].userData._id)" (click)="follow(postMeaage.data.posts[0].userData)">取消追蹤</button>
+    </div>
+  </div>
+</div>
+
+
+<form (ngSubmit)="getPosts()" [formGroup]="searchForm">
+
+  <div class="row">
+
+    <div class="col-4">
+      <select name="" formControlName="timeSort" (change)="getPosts()">
+        <option value="desc">最新貼文</option>
+        <option value="asc">最舊貼文</option>
+      </select>
+    </div>
+    <div class="col-8">
+      <input type="text" formControlName="q" (keyup)="getSearchPosts()" placeholder="搜尋貼文">
+    </div>
+
+  </div>
+</form>
+
+<div class="col-12 postSection" *ngIf="postMeaage.data != undefined && postMeaage.data?.posts?.length == 0">
+  目前尚無動態
+</div>
+
+<div class="col-12 position-relative" *ngFor="let post of postMeaage.data?.posts;let index = index">
+  <div class="message-edit"ngbDropdown>
+    <button  ngbDropdownToggle type="button" class="message-edit-btn">
+      <fa-icon [icon]="faEllipsisVertical" [size]="'lg'"
+          ></fa-icon>
+
+    </button>
+    <div class="dropdown-menu"  ngbDropdownMenu style="inset:0 auto">
+      <button class="dropdown-item"ngbDropdownItem (click)="EditMessage(post._id)">修改貼文</button>
+      <button class="dropdown-item"ngbDropdownItem (click)="deleteMessage(post._id)">刪除貼文</button>
+
+    </div>
+
+  </div>
+  <div class="container postSection">
+    <div class="row my-3">
+      <div class="col-auto me-3">
+        <img [src]="post.userData.userPhoto" alt="" class="postUserImg" (error)="updateUserUrl(post.userData)">
+      </div>
+      <div class="col-auto">
+        <a (click)="routeToUserPost(post.userData._id)"class="name-click">{{post.userData.userName}}</a><br />
+        {{post.createAt|date:"YYYY-MM-dd hh:mm:ss"}}
+      </div>
+    </div>
+    <p>
+      {{post.discussContent}}
+    </p>
+    <div class="my-2">
+      <img [src]="post.discussPhoto" alt="" *ngIf="post.discussPhoto != ''">
+    </div>
+
+    <div class="my-2">
+      <button class="like-btn" (click)="likeThis(post)">
+        <fa-icon [icon]="faThumbsUp" [size]="'lg'"
+          [class]="{'text-blue':Islike(post.likes),'text-gray':Islike(post.likes),'has-hover':Islike(post.likes)}"></fa-icon>
+
+      </button>
+
+      <ng-container *ngIf="post.likes.length == 0">
+        <span class="text-gray">成為第一個按讚的朋友</span>
+      </ng-container>
+      <ng-container *ngIf="post.likes.length != 0">
+        {{post.likes.length}}
+      </ng-container>
+    </div>
+    <form (ngSubmit)="sendComment(post)">
+      <div class="d-flex sendMessageDiv my-2">
+        <div class="userImgDiv mx-2">
+          <img [src]="userInfo?.userPhoto" alt="" class="UserImg" (error)="updateMyUserUrl()">
+        </div>
+        <input type="text" class="" [(ngModel)]="post.userCommentInput" name="comment">
+        <button class="sendMessage">留言</button>
+      </div>
+    </form>
+    <ng-container *ngFor="let comment of post.comments">
+      <div class="comment-section my-2">
+        <div class="container">
+          <div class="d-flex">
+            <div class="userImgDiv mx-2 d-flex align-items-center">
+              <img [src]="userInfo?.userPhoto" alt="" class="UserImg" (error)="updateMyUserUrl()">
+            </div>
+            <div class="">
+              <a (click)="routeToUserPost(comment.commentUser._id)" class="name-click">{{comment.commentUser.userName}}</a><br />
+
+              {{comment.createAt|date:"YYYY-MM-dd hh:mm:ss"}}
+
+            </div>
+          </div>
+          <p class="comment-body">
+            {{comment.comment}}
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+
+
 </div>

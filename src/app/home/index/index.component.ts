@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-  @Input() user = {};
+  @Input() user_id !:string;
   public postMeaage: PostViewModel = new PostViewModel();
   public SearchPsotSetTimeOut!: ReturnType<typeof setTimeout>;
   public faThumbsUp = faThumbsUp;
@@ -31,6 +31,7 @@ export class IndexComponent implements OnInit {
   })
 
   ngOnInit() {
+    console.log(this.user_id)
     this.getName()
     this.getPosts()
   }
@@ -112,6 +113,9 @@ export class IndexComponent implements OnInit {
   Islike(likes: UserInfo[]) {
     return likes.some(x => x._id == this.userInfo.id)
 
+  }
+  routeToUserPost(id:string){
+    this.router.navigate(['/userPost', { 'id': id }])
   }
 }
 

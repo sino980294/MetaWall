@@ -33,7 +33,7 @@ export class CreatAccountComponent implements OnInit {
         this.router.navigate(["/login"]);
       },
       error:(error)=>{
-        console.log(error)
+        this.errorMessage =  error.error.message
       }
     })
   }

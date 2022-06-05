@@ -62,4 +62,5 @@ export class SendPostComponent implements OnInit ,OnDestroy{
       this.imgur$.next(fileList[0])
     }
   }
+
 }

@@ -1,0 +1,75 @@
+.postUserImg {
+  height: 46px;
+  width: 46px;
+  border: 2px solid #000400;
+  border-radius: 50%;
+}
+
+.text-gray {
+  color: gray;
+  &.has-hover:hover {
+    color: blue;
+  }
+}
+.text-blue {
+  color: blue;
+}
+.like-btn {
+  border: none;
+  background: none;
+}
+.sendMessageDiv {
+  height: 40px;
+
+
+  .sendMessage {
+    width: 128px;
+    text-align: center;
+    background-color: #03438d;
+    color: white;
+  }
+}
+.userImgDiv {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 60px;
+  .UserImg {
+    height: 40px;
+    width: 40px;
+    border: 2px solid #000400;
+    border-radius: 50%;
+  }
+}
+.comment-body{
+  padding-left: 80px;
+}
+.comment-section{
+  background-color: #EFECE7;
+}
+.message-edit{
+  position: absolute;
+  right:0;
+  top:0;
+}
+.message-edit-btn{
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: none;
+
+  &::after{
+    display: none;
+  }
+  &:focus-visible{
+    outline: none;
+  }
+}
+.dropdown-menu{
+  inset:0 auto;
+}
+.follow-btn{
+  width: 128px;
+    text-align: center;
+    background-color: #03438d;
+    color: white;
+}

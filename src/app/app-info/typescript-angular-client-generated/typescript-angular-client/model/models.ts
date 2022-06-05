@@ -28,7 +28,7 @@ export class PostDataViewModel{
   "postsLength": number
 }
 export class  PostDatapostsViewModel{
-  "comments": comment[]
+    "comments": comment[]
     "discussContent": string
     "discussPhoto": string
     "id": string
@@ -99,4 +99,22 @@ export class premiumMemberInfo{
     "photo": string
     "gender": string
 }
+}
+export class followerModel{
+    "userData": {
+      "_id": string
+      "createAt": Date
+      "userPhoto": string
+      "userName": string
+    }
+    "_id":string
+    "createdAt": Date
+  }
+
+export class followModel{
+    "status": string
+    "data": {
+      "followers":followerModel[]
+      "following": followerModel[]
+    }
 }

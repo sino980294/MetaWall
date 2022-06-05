@@ -39,7 +39,7 @@
         <img [src]="post.userData.userPhoto" alt="" class="postUserImg" (error)="updateUserUrl(post.userData)">
       </div>
       <div class="col-auto">
-        {{post.userData.userName}}<br />
+        <a (click)="routeToUserPost(post.userData._id)" class="name-click">{{post.userData.userName}}</a><br />
         {{post.createAt|date:"YYYY-MM-dd hh:mm:ss"}}
       </div>
     </div>
@@ -81,7 +81,8 @@
               <img [src]="userInfo?.userPhoto" alt="" class="UserImg" (error)="updateMyUserUrl()">
             </div>
             <div class="">
-              {{comment.commentUser.userName}}<br />
+              <a (click)="routeToUserPost(comment.commentUser._id)" class="name-click">{{comment.commentUser.userName}}</a><br />
+
               {{comment.createAt|date:"YYYY-MM-dd hh:mm:ss"}}
 
             </div>

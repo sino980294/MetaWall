@@ -50,3 +50,19 @@ padding: 16px;
 
 }
 
+.postSection {
+  border: 2px solid #000400;
+  box-shadow: 0px 3px 0px #000400;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+}
+.name-click{
+  cursor: pointer;
+  color: black;
+    text-decoration: none;
+  &:hover{
+    color: blue;
+  }
+}

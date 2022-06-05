@@ -153,15 +153,17 @@ export class Posts_Service {
      * 取得所有貼文。  &lt;p&gt;參數用法：&lt;/p&gt;  &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;&lt;code&gt;postsLength&lt;/code&gt; 在相關網址參數運算下，執行後回傳資料長度。&lt;/li&gt;  &lt;/ul&gt;
      * @param timeSort   &lt;code&gt;timeSort&lt;/code&gt; 參數：  &lt;ul&gt;  &lt;li&gt;預設新到舊&lt;/li&gt;  &lt;li&gt;是否有 &lt;code&gt;asc&lt;/code&gt; 值？，有值有舊到新；沒值有新到舊。&lt;/li&gt;  &lt;/ul&gt;
      * @param q   &lt;code&gt;q&lt;/code&gt; 參數：  &lt;ul&gt;  &lt;li&gt;查找物件中的留言 &lt;code&gt;discussContent&lt;/code&gt;。&lt;/li&gt;  &lt;li&gt;用正則表達式以 JS 轉 mongDB 語法 &lt;code&gt;.find( parName: /&lt;查尋字串&gt;/)&lt;/code&gt;。&lt;/li&gt;  &lt;/ul&gt;
+     * @param queryUser   &lt;code&gt;queryUser&lt;/code&gt; 參數：  &lt;ul&gt;  &lt;li&gt;查找 &lt;code&gt;userData&lt;/code&gt; 指定 user id。&lt;/li&gt;  &lt;/ul&gt;
      * @param pageNum   &lt;code&gt;pageNum&lt;/code&gt; 參數：取頁面資料筆數長度 (目前分頁數 &lt;code&gt;0&lt;/code&gt; 為第一頁)  &lt;ul&gt;  &lt;li&gt;判斷網址參數 &lt;code&gt;pageSize&lt;/code&gt; 是否有值，若無值會段 &lt;code&gt;0&lt;/code&gt; 取出所有資料。&lt;/li&gt;  &lt;li&gt;參數以 &lt;code&gt;1&lt;/code&gt; 累計。&lt;/li&gt;  &lt;/ul&gt;
      * @param pageSize   &lt;code&gt;pageSize&lt;/code&gt; 參數：取頁面資料區間 (分頁中每頁的資料筆數)  &lt;ul&gt;  &lt;li&gt;由第 &lt;code&gt;0&lt;/code&gt; 筆數位置做為 &lt;code&gt;1&lt;/code&gt; 開始計算。&lt;/li&gt;  &lt;li&gt;參數以由 &lt;code&gt;1&lt;/code&gt; 以累計。&lt;/li&gt;  &lt;li&gt;網址參數 &lt;code&gt;pageSize * pageNum &#x3D; 頁面數&lt;/code&gt; 做為計算結果。&lt;/li&gt;  &lt;/ul&gt;
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postsGet(timeSort?: string, q?: string, pageNum?: string, pageSize?: string, observe?: 'body', reportProgress?: boolean): Observable<PostViewModel>;
-    public postsGet(timeSort?: string, q?: string, pageNum?: string, pageSize?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PostViewModel>>;
-    public postsGet(timeSort?: string, q?: string, pageNum?: string, pageSize?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PostViewModel>>;
-    public postsGet(timeSort?: string, q?: string, pageNum?: string, pageSize?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postsGet(timeSort?: string, q?: string, queryUser?: string, pageNum?: string, pageSize?: string, observe?: 'body', reportProgress?: boolean): Observable<PostViewModel>;
+    public postsGet(timeSort?: string, q?: string, queryUser?: string, pageNum?: string, pageSize?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PostViewModel>>;
+    public postsGet(timeSort?: string, q?: string, queryUser?: string, pageNum?: string, pageSize?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PostViewModel>>;
+    public postsGet(timeSort?: string, q?: string, queryUser?: string, pageNum?: string, pageSize?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
 
 
 
@@ -173,6 +175,9 @@ export class Posts_Service {
         }
         if (q !== undefined && q !== null) {
             queryParameters = queryParameters.set('q', <any>q);
+        }
+        if (queryUser !== undefined && queryUser !== null) {
+            queryParameters = queryParameters.set('queryUser', <any>queryUser);
         }
         if (pageNum !== undefined && pageNum !== null) {
             queryParameters = queryParameters.set('pageNum', <any>pageNum);

@@ -1,0 +1,21 @@
+<div class="col-12 TitleDiv">
+  追蹤名單
+</div>
+<div class="col-12 position-relative" *ngFor="let follower of followList;let index = index">
+  <div class="container postSection" >
+    <div class="row my-3">
+      <div class="col-auto me-3">
+        <img [src]="follower.userData.userPhoto" alt="" class="postUserImg" (error)="updatephotoUrl(follower)">
+      </div>
+      <div class="col-auto">
+        <a (click)="routeToUserPost(follower.userData._id)" class="name-click">{{follower.userData.userName}}</a><br />
+
+        追蹤時間: {{follower.createdAt|date:"YYYY-MM-dd hh:mm:ss"}}
+      </div>
+      <div class="col-auto ms-auto mt-auto">
+          已追蹤{{follower.createdAt|DateToNow}}天
+      </div>
+    </div>
+  </div>
+
+</div>
