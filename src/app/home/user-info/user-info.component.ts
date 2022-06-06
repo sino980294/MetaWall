@@ -14,7 +14,7 @@ import { ImgurClient } from 'imgur';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit, OnDestroy {
+export class UserInfoComponent implements OnInit {
   public pageLabel: string = ""
   userInfo !: UserInfo;
   userInfoSendError: string = '';
@@ -33,18 +33,15 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute, private JwtTokenService: JwtTokenServiceService,
     private UserService: Users_Service, private location: Location,
     private ImgurService: ImgurService) { }
-  ngOnDestroy(): void {
-    this.imgur$.unsubscribe();
-  }
 
   ngOnInit(): void {
     this.getPageLabel()
       this.getPremiumInfo()
     this.getUserInfo()
-    this.userInfoForm.setValue({
+    this.userInfoForm.patchValue({
       userName: this.userInfo.userName,
       userPhoto: this.userInfo.userPhoto,
-      gender: 'male'
+      gender: this.userInfo.gender
     })
     this.InitImurgurPipe()
 
@@ -88,6 +85,7 @@ this.premiumMemberInfo = res
   }
   getUserInfo() {
     this.userInfo = this.JwtTokenService.getUserInfo() ?? new UserInfo()
+    console.log(this.userInfo)
   }
   updateMyUserUrl() {
     this.userInfo.userPhoto = './assets/img/login/MetaWall.svg';
@@ -102,7 +100,7 @@ this.premiumMemberInfo = res
     this.UserService.usersPatchProfilePatch(this.userInfoForm.value).subscribe({
       next: (res) => {
         console.log(res)
-        this.userInfoForm.setValue({
+        this.userInfoForm.patchValue({
           userName: res.data.userName,
           userPhoto: res.data.userPhoto,
           gender: res.data.gender
@@ -117,7 +115,7 @@ this.premiumMemberInfo = res
   sendPasswordChange() {
     this.UserService.usersUpdatePasswordPatch(this.passwordForm.value).subscribe({
       next: (res) => {
-        this.passwordForm.setValue({
+        this.passwordForm.patchValue({
           password: '',
           confirmNewPassword: '',
 

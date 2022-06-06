@@ -48,6 +48,7 @@ export class UserInfo {
   "userPhoto": string
   "_id":string
   "IsCarrier":boolean
+  "gender": string
 }
 
 export class commentsViewModel{
