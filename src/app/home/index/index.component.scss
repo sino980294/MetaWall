@@ -27,6 +27,11 @@
     text-align: center;
     background-color: #03438d;
     color: white;
+    &:hover{
+      color: #000400;
+    background-color: #EEC32A;
+    border-color: #023671;
+    }
   }
 }
 .userImgDiv {
@@ -66,4 +71,15 @@
 }
 .dropdown-menu{
   inset:0 auto;
+}
+.follow-btn{
+  width: 128px;
+    text-align: center;
+    background-color: #03438d;
+    color: white;
+    &:hover{
+      color: #000400;
+    background-color: #EEC32A;
+    border-color: #023671;
+    }
 }

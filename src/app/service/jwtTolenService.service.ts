@@ -1,3 +1,4 @@
+import { Users_Service } from './../app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
@@ -8,7 +9,7 @@ import { UserInfo } from '../app-info/typescript-angular-client-generated/typesc
 })
 export class JwtTokenServiceService {
 
-  constructor(private Router:Router) { }
+  constructor(private Router:Router,private Users_Service:Users_Service) { }
   getAccessToken() {
     return localStorage.getItem("token");
   }
@@ -36,5 +37,12 @@ export class JwtTokenServiceService {
   }
   setToken(token:string){
     localStorage.setItem("token", token);
+  }
+  getNewToken(){
+this.Users_Service.usersRefreshTokenPost().subscribe(res=>{
+  if(res?.data?.token){
+    this.setToken(res.data.token)
+  }
+})
   }
 }

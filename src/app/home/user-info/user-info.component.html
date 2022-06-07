@@ -73,7 +73,7 @@
                   <br/>
                   <label  class="mb-2">會員資格: {{premiumMemberInfo.data?.premiumMember?.paid == 1 ? '是':'否'}} </label>
                   <br/>
-                  <label  class="mb-2">會員開啟時間: {{premiumMemberInfo.data?.premiumMember?.startAt}} </label>
+                  <label  class="mb-2">會員開啟時間: {{premiumMemberInfo.data?.premiumMember?.startAt|date : 'yyyy-MM-dd hh:mm'  }} </label>
 
                 </div>
 

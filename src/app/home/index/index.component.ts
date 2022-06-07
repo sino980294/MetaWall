@@ -1,4 +1,5 @@
-import { PostDatapostsViewModel, UserInfo } from './../../app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
+import { Users_Service } from './../../app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
+import { followerModel, PostDatapostsViewModel, UserInfo } from './../../app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
 import { Posts_Service } from '../../app-info/typescript-angular-client-generated/typescript-angular-client/api/posts_.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -6,36 +7,67 @@ import { PostViewModel, comment } from 'src/app/app-info/typescript-angular-clie
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { JwtTokenServiceService } from 'src/app/service/jwtTolenService.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-  @Input() user_id !:string;
+  followList:followerModel[] = []
+ public user_id:string = ""
   public postMeaage: PostViewModel = new PostViewModel();
   public SearchPsotSetTimeOut!: ReturnType<typeof setTimeout>;
   public faThumbsUp = faThumbsUp;
   public faEllipsisVertical = faEllipsisVertical;
   public Ilike = false;
   public userInfo !: UserInfo;
-
+  public selectedUserInfo!:UserInfo
   constructor(private postService: Posts_Service, private JwtTokenService: JwtTokenServiceService,
-    private router: Router
+    private router: Router,private ActivatedRoute : ActivatedRoute,private Users_Service:Users_Service
   ) { }
 
   searchForm = new FormGroup({
     timeSort: new FormControl('desc'),
-    q: new FormControl('')
+    q: new FormControl(''),
+    queryUser:new FormControl('')
   })
 
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     console.log(this.user_id)
     this.getName()
+    this.getUserParam()
     this.getPosts()
   }
+  getFollowList(){
+    this.Users_Service.usersFollowGet().subscribe(res=>{
 
+      this.followList = res.data.following;
+      console.log(this.followList, res.data.followers)
+    })
+  }
+getUserParam(){
+  this.ActivatedRoute.paramMap.pipe(
+    switchMap(params => {
+      const id = params.get('id')
+      console.log(id)
+      if (id) {
+        this.user_id = id.toString();
+      }
+      return this.user_id;
+    }))
+    .subscribe();
+    if(this.user_id != ""){
+      this.getFollowList()
+this.Users_Service.usersAdminGetUserIdGet(this.user_id).subscribe(res=>{
+  console.log(res)
+  this.selectedUserInfo = res.data;
+})
+      this.searchForm.patchValue({queryUser:this.user_id})
+    }
+}
 
   getSearchPosts() {
     clearTimeout(this.SearchPsotSetTimeOut)
@@ -115,7 +147,38 @@ export class IndexComponent implements OnInit {
 
   }
   routeToUserPost(id:string){
-    this.router.navigate(['/userPost', { 'id': id }])
+    this.router.navigate(['/index', { 'id': id }]) .then(() => {
+      window.location.reload();
+    });
+  }
+  follow(UserInfo:UserInfo){
+    if(this.checkFollow(UserInfo._id)){
+
+      this.Users_Service.usersIdFollowDelete(UserInfo._id).subscribe({
+        next:res=>{
+          this.followList = this.followList.filter(x=>x.userData._id != UserInfo._id)
+        }
+      })
+    }else{
+      this.Users_Service.usersIdFollowPost(UserInfo._id).subscribe({
+        next:res=>{
+          this.followList.push({
+            "userData": {...UserInfo,createAt:new Date()},
+            "_id":'',
+            "createdAt": new Date()
+
+          })
+        }
+      })
+    }
+
+  }
+  checkFollow(id:string){
+    if(this.followList.find(x=>x.userData._id == id)){
+      return true
+    }else{
+      return false
+    }
   }
 }
 

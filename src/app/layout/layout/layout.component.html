@@ -9,7 +9,7 @@
               <span class="userName mx-3">{{userName}}</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="navs" ngbDropdownMenu>
-              <button class="dropdown-item"ngbDropdownItem href="#">我的貼文牆</button>
+              <button class="dropdown-item"ngbDropdownItem (click)="routeToUserPost(Userid)">我的貼文牆</button>
               <button class="dropdown-item"ngbDropdownItem routerLink="/userInfo" [queryParams]="{label:'Info'}">修改個人資料</button>
               <button class="dropdown-item" ngbDropdownItem (click)="addCarrier()">加入會員</button>
               <button class="dropdown-item" ngbDropdownItem (click)="logOut()">登出</button>
@@ -37,7 +37,8 @@
         <img [src]="userImage" class="sidebar-image" alt=""(error)="updateUserUrl()">
       </div>
       <div class="col-8 d-flex justify-content-start align-items-center fw-bold">
-          {{userName}}
+        <a (click)="routeToUserPost(Userid)" class="name-click">{{userName}}</a>
+
       </div>
     </div>
     <div class="my-3 row sideBar-click"(click)="getFollowers()">
@@ -50,17 +51,6 @@
           追蹤名單
       </div>
     </div>
-    <div class="my-3 row">
-      <div class="col-4">
-        <div class="sidebar-image d-flex justify-content-center align-items-center" alt="">
-       <fa-icon [icon]="faThumbsUp" [class]="'text-center sidebar-svg-text'"></fa-icon>
-        </div>
-      </div>
-      <div class="col-8 d-flex justify-content-start align-items-center fw-bold">
-          我按讚的文章(尚未開發)
-      </div>
-    </div>
-
   </div>
 </div>
 

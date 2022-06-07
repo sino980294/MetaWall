@@ -35,6 +35,7 @@ export class UserInfoComponent implements OnInit {
     private ImgurService: ImgurService) { }
 
   ngOnInit(): void {
+    this.JwtTokenService.getNewToken()
     this.getPageLabel()
       this.getPremiumInfo()
     this.getUserInfo()
@@ -85,6 +86,7 @@ this.premiumMemberInfo = res
   }
   getUserInfo() {
     this.userInfo = this.JwtTokenService.getUserInfo() ?? new UserInfo()
+
     console.log(this.userInfo)
   }
   updateMyUserUrl() {
@@ -105,7 +107,9 @@ this.premiumMemberInfo = res
           userPhoto: res.data.userPhoto,
           gender: res.data.gender
         })
-        this.userInfoSendError = '設定成功'
+        alert('設定成功')
+        this.JwtTokenService.getNewToken();
+        window.location.reload();
       },
       error: (err) => {
         this.userInfoSendError = err.error.message
@@ -120,7 +124,9 @@ this.premiumMemberInfo = res
           confirmNewPassword: '',
 
         })
-        this.PasswordSendError = '設定成功'
+        alert('設定成功')
+        this.JwtTokenService.getNewToken();
+        window.location.reload();
       },
       error: (err) => {
         console.log(err)

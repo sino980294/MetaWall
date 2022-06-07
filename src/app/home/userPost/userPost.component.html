@@ -1,18 +1,4 @@
-<div class="col-12 TitleDiv container mb-3" *ngIf="postMeaage.data?.posts != undefined">
-  <div class="row my-3">
-    <div class="col-auto me-3">
-      <img [src]="postMeaage.data.posts[0].userData.userPhoto" alt="" class="postUserImg" (error)="updateUserUrl(postMeaage.data.posts[0].userData)">
-    </div>
-    <div class="col-auto text-start">
-      {{postMeaage.data.posts[0].userData.userName}}<br />
-      {{postMeaage.data.posts[0].createAt|date:"YYYY-MM-dd hh:mm:ss"}}
-    </div>
-    <div class="col-3 ms-auto">
-      <button class="follow-btn" *ngIf="!checkFollow(postMeaage.data.posts[0].userData._id)" (click)="follow(postMeaage.data.posts[0].userData)">追蹤</button>
-      <button class="follow-btn" *ngIf="checkFollow(postMeaage.data.posts[0].userData._id)" (click)="follow(postMeaage.data.posts[0].userData)">取消追蹤</button>
-    </div>
-  </div>
-</div>
+
 
 
 <form (ngSubmit)="getPosts()" [formGroup]="searchForm">

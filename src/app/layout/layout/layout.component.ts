@@ -20,6 +20,7 @@ export class LayoutComponent implements OnInit {
 public userName:string = ""
 public userImage:string = ""
 public userIsCarrier:boolean = false;
+public Userid = ""
 public faBell = faBell;
 public faThumbsUp = faThumbsUp;
 
@@ -31,6 +32,7 @@ public faThumbsUp = faThumbsUp;
     this.userInfo = this.JwtTokenServiceService.getUserInfo() ;
     console.log(this.userInfo)
     if(this.userInfo){
+      this.Userid = this.userInfo.id
       this.userName  = this.userInfo.userName
       this.userImage  = this.userInfo.userPhoto
       this.userIsCarrier = this.userIsCarrier
@@ -61,5 +63,9 @@ document.body.removeChild(div)
     this.router.navigate(['/following', { 'id': this.userInfo?.id }])
 
   }
-
+  routeToUserPost(id:string){
+    this.router.navigate(['/index', { 'id': id }]) .then(() => {
+      window.location.reload();
+    });;
+  }
 }

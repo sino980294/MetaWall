@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { userSignUpSearchModel } from '../model/models';
+
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
@@ -88,6 +89,54 @@ export class Users_Service {
 
         return this.httpClient.post<any>(`${this.basePath}/users/admin/createdUser`,
             null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 列出單筆會員 (後台)
+     * 列出單筆會員 (後台)
+     * @param id   &lt;ul&gt;  &lt;li&gt;Params Path Variables &lt;code&gt;:id&lt;/code&gt; (user ID)&lt;/li&gt;  &lt;/ul&gt;
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public usersAdminGetUserIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public usersAdminGetUserIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public usersAdminGetUserIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public usersAdminGetUserIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling usersAdminGetUserIdGet.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (apiKeyAuth) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            queryParameters = queryParameters.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<any>(`${this.basePath}/users/admin/getUser/${encodeURIComponent(String(id))}`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -288,10 +337,10 @@ export class Users_Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public usersLoginPost(body?: userSignUpSearchModel, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public usersLoginPost(body?: userSignUpSearchModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public usersLoginPost(body?: userSignUpSearchModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public usersLoginPost(body?: userSignUpSearchModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+     public usersLoginPost(body?: userSignUpSearchModel, observe?: 'body', reportProgress?: boolean): Observable<any>;
+     public usersLoginPost(body?: userSignUpSearchModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+     public usersLoginPost(body?: userSignUpSearchModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+     public usersLoginPost(body?: userSignUpSearchModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -373,7 +422,7 @@ export class Users_Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public usersPatchProfilePatch(body?: userSignUpSearchModel, observe?: 'body', reportProgress?: boolean): Observable<any>;
+     public usersPatchProfilePatch(body?: userSignUpSearchModel, observe?: 'body', reportProgress?: boolean): Observable<any>;
     public usersPatchProfilePatch(body?: userSignUpSearchModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
     public usersPatchProfilePatch(body?: userSignUpSearchModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public usersPatchProfilePatch(body?: userSignUpSearchModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
@@ -417,16 +466,60 @@ export class Users_Service {
     }
 
     /**
+     * 更新token
+     *   &lt;ul&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;/ul&gt;
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public usersRefreshTokenPost(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public usersRefreshTokenPost(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public usersRefreshTokenPost(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public usersRefreshTokenPost(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+
+        let headers = this.defaultHeaders;
+
+        // authentication (apiKeyAuth) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["Authorization"]) {
+            queryParameters = queryParameters.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<any>(`${this.basePath}/users/refreshToken`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * 使用者註冊
      *   &lt;ul&gt;  &lt;li&gt;密碼產生 Token 後至其他 users API 使用&lt;/li&gt;  &lt;li&gt;取得 Token 至上方 Authorize 按鈕以格式 &lt;code&gt;Bearer ＜Token＞&lt;/code&gt; 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。&lt;/li&gt;  &lt;li&gt;欄位 &lt;code&gt;\&quot;gender\&quot;&lt;/code&gt; 只能接受 &lt;code&gt;\&quot;male\&quot;&lt;/code&gt;、&lt;code&gt;\&quot;female\&quot;&lt;/code&gt;、&lt;code&gt;\&quot;\&quot;&lt;/code&gt;。&lt;/li&gt;  &lt;/ul&gt;
      * @param body
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public usersSignUpPost(body?: userSignUpSearchModel, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public usersSignUpPost(body?: userSignUpSearchModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public usersSignUpPost(body?: userSignUpSearchModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public usersSignUpPost(body?: userSignUpSearchModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+     public usersSignUpPost(body?: userSignUpSearchModel, observe?: 'body', reportProgress?: boolean): Observable<any>;
+     public usersSignUpPost(body?: userSignUpSearchModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+     public usersSignUpPost(body?: userSignUpSearchModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+     public usersSignUpPost(body?: userSignUpSearchModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -465,10 +558,10 @@ export class Users_Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public usersUpdatePasswordPatch(body: userSignUpSearchModel, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public usersUpdatePasswordPatch(body: userSignUpSearchModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public usersUpdatePasswordPatch(body: userSignUpSearchModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public usersUpdatePasswordPatch(body: userSignUpSearchModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+     public usersUpdatePasswordPatch(body: userSignUpSearchModel, observe?: 'body', reportProgress?: boolean): Observable<any>;
+     public usersUpdatePasswordPatch(body: userSignUpSearchModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+     public usersUpdatePasswordPatch(body: userSignUpSearchModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+     public usersUpdatePasswordPatch(body: userSignUpSearchModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling usersUpdatePasswordPatch.');

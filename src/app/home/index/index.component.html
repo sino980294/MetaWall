@@ -1,4 +1,19 @@
-<form (ngSubmit)="getPosts()" [formGroup]="searchForm">
+<div class="col-12 TitleDiv container mb-3" *ngIf="selectedUserInfo != undefined">
+  <div class="row my-3">
+    <div class="col-auto me-3">
+      <img [src]="selectedUserInfo.userPhoto" alt="" class="postUserImg" (error)="updateUserUrl(selectedUserInfo)">
+    </div>
+    <div class="col-auto text-start my-auto">
+      {{selectedUserInfo.userName}}
+    </div>
+    <div class="col-3 ms-auto my-auto" *ngIf="selectedUserInfo._id != userInfo.id">
+      <button class="follow-btn" *ngIf="!checkFollow(selectedUserInfo._id)" (click)="follow(selectedUserInfo)">追蹤</button>
+      <button class="follow-btn" *ngIf="checkFollow(selectedUserInfo._id)" (click)="follow(selectedUserInfo)">取消追蹤</button>
+    </div>
+  </div>
+</div>
+
+<form (ngSubmit)="getPosts()" [formGroup]="searchForm" *ngIf="postMeaage.data?.posts != undefined">
 
   <div class="row">
 
@@ -15,7 +30,7 @@
   </div>
 </form>
 
-<div class="col-12 postSection" *ngIf="postMeaage.data != undefined && postMeaage.data?.posts?.length == 0">
+<div class="col-12 postSection" *ngIf="postMeaage.data != undefined && postMeaage.data?.posts?.length == 0 && selectedUserInfo == undefined">
   目前尚無動態，新增一則貼文吧！
 </div>
 

@@ -1,4 +1,4 @@
-import { followerModel } from './../../app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
+import { followerModel, UserInfo } from './../../app-info/typescript-angular-client-generated/typescript-angular-client/model/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Posts_Service } from 'src/app/app-info/typescript-angular-client-generated/typescript-angular-client/api/posts_.service';
 import { Users_Service } from './../../app-info/typescript-angular-client-generated/typescript-angular-client/api/users_.service';
@@ -47,7 +47,7 @@ export class FollowingComponent implements OnInit {
       })
   }
   routeToUserPost(id:string){
-    this.Router.navigate(['/userPost', { 'id': id }])
+    this.Router.navigate(['/index', { 'id': id }])
   }
   updatephotoUrl(follower:followerModel){
     follower.userData.userPhoto = './assets/img/login/MetaWall.svg'
