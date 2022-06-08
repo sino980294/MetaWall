@@ -76,7 +76,8 @@ this.Users_Service.usersAdminGetUserIdGet(this.user_id).subscribe(res=>{
     }, 1000);
   }
   getPosts() {
-    this.postService.postsGet(this.searchForm.value.timeSort, this.searchForm.value.q).subscribe({
+
+    this.postService.postsGet(this.searchForm.value.timeSort, this.searchForm.value.q,this.searchForm.value.queryUser).subscribe({
       next: res => {
 
         this.postMeaage = res;
