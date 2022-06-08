@@ -32,6 +32,10 @@
     background-color: #EEC32A;
     border-color: #023671;
     }
+    &:disabled:hover{
+      background-color: #03438d;
+      color: white;
+    }
   }
 }
 .userImgDiv {

@@ -35,7 +35,7 @@
 </div>
 
 <div class="col-12 position-relative" *ngFor="let post of postMeaage.data?.posts;let index = index">
-  <div class="message-edit"ngbDropdown>
+  <div class="message-edit"ngbDropdown *ngIf="post.userData._id == userInfo.id">
     <button  ngbDropdownToggle type="button" class="message-edit-btn">
       <fa-icon [icon]="faEllipsisVertical" [size]="'lg'"
           ></fa-icon>
@@ -84,8 +84,8 @@
         <div class="userImgDiv mx-2">
           <img [src]="userInfo?.userPhoto" alt="" class="UserImg" (error)="updateMyUserUrl()">
         </div>
-        <input type="text" class="" [(ngModel)]="post.userCommentInput" name="comment">
-        <button class="sendMessage">留言</button>
+        <input type="text" class="" [(ngModel)]="post.userCommentInput"[disabled]="!userInfo.premiumMember" name="comment" [placeholder]="userInfo.premiumMember?'留言':'請先成為VIP會員才可留言'">
+        <button class="sendMessage"[disabled]="!userInfo.premiumMember">留言</button>
       </div>
     </form>
     <ng-container *ngFor="let comment of post.comments">
@@ -93,7 +93,7 @@
         <div class="container">
           <div class="d-flex">
             <div class="userImgDiv mx-2 d-flex align-items-center">
-              <img [src]="userInfo?.userPhoto" alt="" class="UserImg" (error)="updateMyUserUrl()">
+              <img [src]="comment.commentUser.userPhoto" alt="" class="UserImg" (error)="updateUserUrl(comment.commentUser)">
             </div>
             <div class="">
               <a (click)="routeToUserPost(comment.commentUser._id)" class="name-click">{{comment.commentUser.userName}}</a><br />

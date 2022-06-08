@@ -49,6 +49,7 @@ export class UserInfo {
   "_id":string
   "IsCarrier":boolean
   "gender": string
+  "premiumMember":boolean
 }
 
 export class commentsViewModel{
